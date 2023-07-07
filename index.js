@@ -1,5 +1,12 @@
-const express = require("express");
+const express = require('express'),
+   morgan = require('morgan'),
+   fs = require('fs'),
+   path = require('path');
 const app = express();
+
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
+
+app.use(morgan('combined',{stream: accessLogStream}));
 
 let myTopTenMovies = [
     {
@@ -54,10 +61,16 @@ let myTopTenMovies = [
     }
  ];
  
- const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 app.use(express.static("public"));
 
 app.use(morgan('combined', {stream: accessLogStream}));
+//GET requests
+app.get('/', (req, res) => {
+   res.send('Welcome to My Top Movies!');
+});
+app.get('/documentation', (req, res) => {
+   res.sendFile('public/documentation.html', {root: __dirname});
+});
 
 app.use((err, req, res, next) => {
    console.error(err.stack);
