@@ -4,13 +4,26 @@ const express = require('express'),
    bodyParser = require('body-parser'),
    path = require('path');
    uuid = require('uuid');
+
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
+const Genres = Models.Genre;
+const Directors = Models.Directors;
 
 const app = express();
-mongoose.connect('mongodb://localhost:27017/MyFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+
+mongoose.connect('mongodb://127.0.0.1:27017/cfDB', 
+  { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+  }).then(() => {
+    console.log('Connected to MongoDB')
+  }).catch((e) => {
+    console.log('Unable to connect to MongoDB. Error: '+ e);
+
+  });
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 
 //Default
@@ -19,7 +32,7 @@ app.get("/", (req,res) => {
 });
 
 //GET Movies
-app.get('/movies', (req, res) => {
+app.get("/movies", (req, res) => {
     Movies.find()
       .then((movies) => {
         res.status(201).json(movies);
