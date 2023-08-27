@@ -13,6 +13,8 @@ const Genres = Models.Genre;
 const Directors = Models.Directors;
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://127.0.0.1:27017/cfDB', 
   { 
@@ -55,7 +57,6 @@ app.get("/movies", (req, res) => {
       });
   });
 
-
   // GET User by Username
 app.get('/users/:Username', (req, res) => {
   Users.findOne({ Username: req.params.Username })
@@ -67,7 +68,6 @@ app.get('/users/:Username', (req, res) => {
       res.status(500).send('Error: ' + err);
     });
 });
-
 
 // GET Movie Title (READ)
   app.get('/movies/:Title', (req, res) => {
@@ -81,7 +81,6 @@ app.get('/users/:Username', (req, res) => {
       });
   });
 
-
   // GET by Genre (READ)
   app.get('/movies/genres/:genreName', (req, res) => {
     Movies.findOne({ 'Genre.Name': req.params.genreName })
@@ -93,8 +92,6 @@ app.get('/users/:Username', (req, res) => {
         res.status(500).send('Error: ' + err);
       });
   });
-
-
 
   // GET by Director
   app.get('/movies/directors/:directorsName', (req, res) => {
@@ -108,37 +105,32 @@ app.get('/users/:Username', (req, res) => {
       });
   });
 
-
-
-
 // POST/CREATE new user
-  app.post('/users', (req, res) => {
-    Users.findOne({ Username: req.body.Username })
-      .then((user) => {
-        if (user) {
-          return res.status(400).send(req.body.Username + 'already exists');
-        } else {
-          Users
-            .create({
-              Username: req.body.Username,
-              Password: req.body.Password,
-              Email: req.body.Email,
-              Birthday: req.body.Birthday
-            })
-            .then((user) =>{res.status(201).json(user) })
-          .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
+app.post('/users', async (req, res) => {
+  await Users.findOne({Username: req.body.Username})
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + 'already exists');
+      } else {
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
           })
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send('Error: ' + error);
-      });
-  });
-
-
+          .then((user) =>{res.status(201).json(user) })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send('Error: ' + error);
+        })
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
+});
 
 // PUT/UPDATE user info
   app.put('/users/:Username', (req, res) => {
@@ -161,9 +153,6 @@ app.get('/users/:Username', (req, res) => {
     });
   });
 
-
-
-
 // ADD movies to favorites list
   app.post('/users/:Username/movies/:MovieID', (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, {
@@ -180,7 +169,6 @@ app.get('/users/:Username', (req, res) => {
     });
   });
 
-
   // DELETE Movie
   app.delete('/users/:Username/movies/:MovieID', (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, {
@@ -196,9 +184,6 @@ app.get('/users/:Username', (req, res) => {
       }
     });
   });
-
-
-
 
 //DELETE username
 app.delete('/users/:Username', (req, res) => {
