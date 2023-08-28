@@ -10,100 +10,152 @@
             and directors, and let you save your favorite movies to your account.
         </p>
         
+        <h1>How To Use This API</h1>
         <table>
-            <thead>
-              <tr>
-                <th>Business Logic</th>
-                <th>URL</th>
-                <th>HTTP Method</th>
-                <th>Query Parameters</th>
-                <th>Request Body Data Format</th>
-                <th>Response Body Data Format</th>
-              </tr>
-            </thead>
-      
-            <tbody>
-              <tr>
-                <td>Allows a user to be created</td>
-                <td>/users</td>
-                <td>POST</td>
-                <td>None</td>
-                <td>A JSON object of the new user, structured like: {"Username": "", "id": "", "favoriteMovie": ""}</td>
-                <td>A JSON object of the new user added, structured like: {"Username": "", "id": "", "favoriteMovie": ""}</td>
-              </tr>
-      
-              <tr>
-                <td>Allows users to change their username</td>
-                <td>/users/:id</td>
-                <td>PUT</td>
-                <td>:id</td>
-                <td>None</td>
-                <td>A JSON object of the user</td>
-              </tr>
-      
-              <tr>
-                <td>Allows users to add a movie to their favorites</td>
-                <td>/users/:id/:movieTitle</td>
-                <td>POST</td>
-                <td>:id, :movieTitle</td>
-                <td>None</td>
-                <td>Text confirming the movie has been added to the user's list</td>
-              </tr>
-      
-              <tr>
-                <td>Allows users to remove a movie from their favorites</td>
-                <td>/users/:id/:movieTitle</td>
-                <td>DELETE</td>
-                <td>:id, :movieTitle</td>
-                <td>None</td>
-                <td>Text confirming the movie has been removed from the user's list</td>
-              </tr>
-      
-              <tr>
-                <td>Allows a user to be deleted</td>
-                <td>/users/:id</td>
-                <td>DELETE</td>
-                <td>:id</td>
-                <td>None</td>
-                <td>Text confirming the user has been deleted</td>
-              </tr>
-      
-              <tr>
-                <td>Returns a list of all movies</td>
-                <td>/movies</td>
-                <td>GET</td>
-                <td>None</td>
-                <td>None</td>
-                <td>A JSON object of all the movies</td>
-              </tr>
-      
-              <tr>
-                <td>Returns data about single movie by title</td>
-                <td>/movies/:title</td>
-                <td>GET</td>
-                <td>:title</td>
-                <td>None</td>
-                <td>A JSON object of a single movie</td>
-              </tr>
-      
-              <tr>
-                <td>Returns data about a genre by name</td>
-                <td>/movies/genres/:genreName</td>
-                <td>GET</td>
-                <td>:genreName</td>
-                <td>None</td>
-                <td>A JSON object of a specific genre</td>
-              </tr>
-      
-              <tr>
-                <td>Returns data about a director by name</td>
-                <td>/movies/directors/:name</td>
-                <td>GET</td>
-                <td>:directorName</td>
-                <td>None</td>
-                <td>A JSON object of a specific director</td>
-              </tr>
-            </tbody>
-          </table>
+          <thead>
+            <tr>
+              <th>Business Logic</th>
+              <th>URL</th>
+              <th>HTTP Method</th>
+              <th>Query Parameters</th>
+              <th>Request Body Data Format</th>
+              <th>Response Body Data Format</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Returns all current users</td>
+              <td>/users</td>
+              <td>GET</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>A JSON object of all the current users</td>
+            </tr>
+
+            <tr>
+              <td>Returns a specific user by name</td>
+              <td>/users/:userName</td>
+              <td>GET</td>
+              <td>:userName</td>
+              <td>N/A</td>
+              <td>A JSON object of all a specific user</td>
+            </tr>
+
+            <tr>
+              <td>Returns a list of all movies</td>
+              <td>/movies</td>
+              <td>GET</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>A JSON object of all the movies</td>
+            </tr>
+
+            <tr>
+              <td>Returns a specific movie by title</td>
+              <td>/movies/:title</td>
+              <td>GET</td>
+              <td>:title</td>
+              <td>N/A</td>
+              <td>A JSON object of one movie</td>
+            </tr>
+
+            <tr>
+              <td>Allows users to search for a movie by genre</td>
+              <td>/users/genres/:genreName</td>
+              <td>GET</td>
+              <td>:genreName</td>
+              <td>N/A</td>
+              <td>returns all movies with the genre searched</td>
+            </tr>
+
+            <tr>
+              <td>Returns movies by directors</td>
+              <td>/movies/directors/:directorName</td>
+              <td>GET</td>
+              <td>:directorName</td>
+              <td>N/A</td>
+              <td>A JSON object of all the movies with that searched director</td>
+            </tr>
+
+            <tr>
+              <td>Allows a user to create a new account</td>
+              <td>/users/</td>
+              <td>POST</td>
+              <td>N/A</td>
+              <td>You Must Enter a JSON object of a new user ie.{
+                "Username": "PizzaLover",
+                "Password": "HungryHowies9898",
+                "Email": "PizzaHunger@gmail.com",
+                "Birthday": "01-07-1993"
+                } *note Username,Password,Email,Birthday must be capitalized and all fields must be field out. </td>
+              <td>A JSON object of a new user added plus an ID number and empty array to store users favorite movies
+                ie. {
+                "Username": "PizzaLover",
+                "Password": "HungryHowies9898",
+                "Email": "PizzaHunger@gmail.com",
+                "Birthday": "1993-01-07T05:00:00.000Z",
+                "FavoriteMovies": [],
+                "_id": "646246127a99d582c7aa8f4d",
+                "__v": 0
+                }</td>
+            </tr>
+
+            <tr>
+              <td>Saves a users favorite movie</td>
+              <td>/users/:userName/:MovieID</td>
+              <td>POST</td>
+              <td>:userName/:MovieID</td>
+              <td>In the url /:MovieID use the ObjectID of the movie document in the movie collection of a specific
+                movie you like.</td>
+              <td>it will return a JSON Object with the ussers id, username,password email, birthday and the favorite
+                movie you added will be in the array of favorite movies </td>
+            </tr>
+
+            <tr>
+              <td>Allows a user to be deleted</td>
+              <td>/users/:userName</td>
+              <td>DELETE</td>
+              <td>:userName</td>
+              <td>N/A</td>
+              <td>Response text saying ie. This "User" has been deleted </td>
+            </tr>
+
+            <tr>
+              <td>Allows a user to update their user information</td>
+              <td>/user/:userName</td>
+              <td>PUT</td>
+              <td>:userName</td>
+              <td>A JSON object of the four user categories, each categorize ie. Username, Password etc. must be
+                capitlized and filled in even if its not updated. For example {
+                "Username": "JuniorPizzaBoy",
+                "Password": "HungryHowiesPizza9898",
+                "Email": "PizzaHungerandSoda@gmail.com",
+                "Birthday": "October 31, 2005"
+                }
+              </td>
+              <td>A JSON object of the updated information you changed and the information you didn't change. If you
+                updated all categories all information when come back updated ie. {
+                "_id": "646238c8a0d5073f558507c1",
+                "Username": "JuniorPizzaBoy",
+                "Password": "HungryHowiesPizza9898",
+                "Email": "PizzaHungerandSoda@gmail.com",
+                "Birthday": "2005-10-31T05:00:00.000Z",
+                "FavoriteMovies": [],
+                "__v": 0
+                } </td>
+            </tr>
+
+            <tr>
+              <td>Removes a users favorite movie</td>
+              <td>/users/:userName/movies/:MovieID</td>
+              <td>DELETE</td>
+              <td>:userName/:MovieID</td>
+              <td>In the url /:MovieID use the ObjectID of the movie document in the movie collection of a specific
+                returns a JSON object of all users information and updated FavoriteMovies missing the movie you
+                requested to be deleted.</td>
+            </tr>
+          </tbody>
+        </table>
     </body>
 </html>
