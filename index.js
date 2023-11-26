@@ -14,6 +14,13 @@ const Users = Models.User;
 
 const app = express();
 
+// ***** Keep this local connection around for local development/testing.
+// mongoose.connect('mongodb://localhost:27017/cfDB', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const cors = require('cors');
@@ -36,7 +43,7 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-mongoose.connect('mongodb://127.0.0.1:27017/cfDB', 
+mongoose.connect( process.env.CONNECTION_URI,
   { 
     useNewUrlParser: true, 
     useUnifiedTopology: true 
