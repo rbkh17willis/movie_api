@@ -41,7 +41,6 @@ app.use(cors());
 // }));
 let auth = require('./auth')(app);
 const passport = require('passport');
-require('./passport');
 
 mongoose.connect(process.env.CONNECTION_URI,
   { 
@@ -185,11 +184,7 @@ app.post('/users',
   //saving token for posted users
   const jwtSecret = 'your_jwt_secret'; // This has to be the same key used in the JWTStrategy
 
-const jwt = require('jsonwebtoken'),
-  passport = require('passport');
-
-require('./passport'); // Your local passport file
-
+const jwt = require('jsonwebtoken')
 
 let generateJWTToken = (user) => {
   return jwt.sign(user, jwtSecret, {
