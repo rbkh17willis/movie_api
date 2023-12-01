@@ -288,7 +288,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("Internal Server Error");
 });
 
-const port = process.env.PORT || 10000;
+const port = process.env.PORT || 8088;
 app.listen(port, '0.0.0.0',() => {
  console.log('Listening on Port ' + port);
 });
