@@ -79,3 +79,5 @@
 ::1 - - [05/Sep/2023:18:52:43 +0000] "GET /movies/genres/Action HTTP/1.1" 200 673 "-" "PostmanRuntime/7.32.3"
 ::1 - - [05/Sep/2023:18:53:07 +0000] "GET /movies/Inception HTTP/1.1" 200 529 "-" "PostmanRuntime/7.32.3"
 ::1 - - [05/Sep/2023:18:53:48 +0000] "PUT /users/bigpapa HTTP/1.1" 200 170 "-" "PostmanRuntime/7.32.3"
+127.0.0.1 - - [28/Nov/2023:18:45:13 +0000] "GET /users?Username=bigpapa&Password=18901 HTTP/1.1" 401 - "-" "PostmanRuntime/7.35.0"
+127.0.0.1 - - [28/Nov/2023:18:45:22 +0000] "GET /users?Username=bigpapa&Password=18901 HTTP/1.1" 401 - "-" "PostmanRuntime/7.35.0"
