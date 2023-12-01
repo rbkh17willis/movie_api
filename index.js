@@ -41,8 +41,9 @@ app.use(cors());
 // }));
 let auth = require('./auth')(app);
 const passport = require('passport');
-
-mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const KEY = (process.env.CONNECTION_URI);
+console.log (KEY);
+mongoose.connect(KEY, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
 app.use(morgan('combined', { stream: accessLogStream }));
@@ -287,8 +288,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("Internal Server Error");
 });
 
-const port = process.env.PORT || 8088;
+const port = process.env.PORT || 10000;
 app.listen(port, '0.0.0.0',() => {
  console.log('Listening on Port ' + port);
 });
-
