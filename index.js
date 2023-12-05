@@ -13,6 +13,8 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 const app = express();
+require('dotenv').config()
+console.log(process.env) // remove this after you've confirmed it is working
 
 // ***** Keep this local connection around for local development/testing.
 // mongoose.connect('mongodb://localhost:27017/cfDB', {
@@ -29,20 +31,25 @@ app.use(cors());
 
 // let allowedOrigins = ['http://localhost:8088', 'http://testsite.com'];
 
-// app.use(cors({
-//   origin: (origin, callback) => {
-//     if(!origin) return callback(null, true);
-//     if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
-//       let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
-//       return callback(new Error(message ), false);
-//     }
-//     return callback(null, true);
-//   }
-// }));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        let message =
+          "The CORS policy for this application doesn’t allow access from origin " +
+          origin;
+        return callback(new Error(message), false);
+      }
+      return callback(null, true);
+    },
+  })
+);
 let auth = require('./auth')(app);
 const passport = require('passport');
 
-mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect( process.env.CONNECTION_URI || 'mongodb://localhost:8088/cfDB',
+  { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
