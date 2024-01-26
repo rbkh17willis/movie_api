@@ -74,7 +74,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), async (req,
 });
 
   // GET Users
-  app.get('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  app.get('/users', async (req, res) => {
     await Users.find()
       .then((users) => {
         res.status(201).json(users);
@@ -86,7 +86,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), async (req,
   });
 
   // GET User by Username
-  app.get('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  app.get('/users/:Username', async (req, res) => {
     await Users.findOne({ Username: req.params.Username })
       .then((user) => {
         res.json(user);
@@ -220,7 +220,7 @@ module.exports = (router) => {
 }
 
 // PUT/UPDATE user info
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.put('/users/:Username', async (req, res) => {
   if(req.user.Username !== req.params.Username){
       return res.status(400).send('Permission denied');
   }
