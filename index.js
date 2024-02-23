@@ -17,10 +17,10 @@ require('dotenv').config()
 console.log(process.env) // remove this after you've confirmed it is working
 
 // ***** Keep this local connection around for local development/testing.
-// mongoose.connect('mongodb://localhost:27017/cfDB', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+/*mongoose.connect('localhost:8088', {
+useNewUrlParser: true,
+ useUnifiedTopology: true,
+ }); */
 
 
 app.use(bodyParser.json());
@@ -50,7 +50,7 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 
 mongoose.connect( process.env.CONNECTION_URI || 'mongodb://localhost:8088/cfDB',
-  { useNewUrlParser: true, useUnifiedTopology: true });
+  { useNewUrlParser: true, useUnifiedTopology: true }); 
 
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
@@ -263,15 +263,15 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
   Users.findOneAndUpdate({ Username: req.params.Username }, {
       $pull: { FavoriteMovies: req.params.MovieID }
     },
-      { new: true }, 
-    (err, updatedUser) => {
-      if (err) {
+      { new: true })
+      .then((updatedUser) => {
+        return res.json(updatedUser);
+        })
+        .catch(err => {
         console.error(err);
-        res.status(500).send('Error: ' + err);
-      } else {
-        res.json(updatedUser);
-      }
-    });
+        return res.status(500).send('Error: ' + err);
+        });
+    
   });
 
 //DELETE username
