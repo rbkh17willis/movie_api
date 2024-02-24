@@ -3,11 +3,11 @@ This is the API/backend for the project myFlix-client. This REST API gives users
 # Link to Frontend (myFlix-client)
 https://github.com/rbkh17willis/myFlix-client.git
 # Key Dependencies 
-cors
-dotenv
-express/express-validator
-JSON web token
-mongoose
-morgan
-passport/passport-jwt/passport-local
-uuid
+-cors
+-dotenv
+-express/express-validator
+-JSON web token
+-mongoose
+-morgan
+-passport/passport-jwt/passport-local
+-uuid
