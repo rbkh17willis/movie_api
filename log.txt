@@ -82,3 +82,6 @@
 127.0.0.1 - - [28/Nov/2023:18:45:13 +0000] "GET /users?Username=bigpapa&Password=18901 HTTP/1.1" 401 - "-" "PostmanRuntime/7.35.0"
 127.0.0.1 - - [28/Nov/2023:18:45:22 +0000] "GET /users?Username=bigpapa&Password=18901 HTTP/1.1" 401 - "-" "PostmanRuntime/7.35.0"
 127.0.0.1 - - [21/Feb/2024:00:26:04 +0000] "DELETE /users/test7/movies/64d2adb7f4512a8fae0a8683 HTTP/1.1" 500 21 "http://localhost:1234/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+127.0.0.1 - - [02/Sep/2024:00:53:09 +0000] "GET / HTTP/1.1" 200 18 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+127.0.0.1 - - [02/Sep/2024:00:53:09 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8088/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+127.0.0.1 - - [02/Sep/2024:00:58:32 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
