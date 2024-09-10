@@ -74,7 +74,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), async (req,
     });
 });
 
-  /**
+/**
  * get all users
  */
   app.get('/users', async (req, res) => {
@@ -88,7 +88,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), async (req,
       });
   });
 
-  /**
+/**
  * get user by id
  */
   app.get('/users/:Username', async (req, res) => {
